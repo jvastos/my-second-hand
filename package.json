@@ -1,0 +1,28 @@
+{
+  "name": "my-seccond-hand",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "My first project on Back-End. I'm using Node.js, Express and MongoDB to build a simple second hand shop for clothing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvastos/my-seccond-hand.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jvastos/my-seccond-hand/issues"
+  },
+  "homepage": "https://github.com/jvastos/my-seccond-hand#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mongodb": "^4.4.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  }
+}
