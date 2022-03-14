@@ -1,0 +1,30 @@
+### CART METHODS
+### Create a new cart
+POST http://localhost:4649/carts
+Content-Type: application/json
+
+{
+    "date": "220311",
+    "matchStock": false,
+    "numberOfItems": 0
+}
+
+### Get all carts
+GET http://localhost:4649/carts
+
+### Get all carts that match stock
+GET http://localhost:4649/carts?matchStock=true
+
+### Get all carts that match stock
+GET http://localhost:4649/carts?numberOfItems=0
+
+### Patch a cart
+PATCH http://localhost:4649/carts/m
+Content-Type: application/json
+
+{
+    "numberOfItems": 0
+}
+
+### Delete an order
+DELETE http://localhost:4649/carts/s

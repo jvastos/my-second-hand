@@ -1,0 +1,34 @@
+### ORDER METHODS
+
+### Add an order
+POST http://localhost:4649/orders
+Content-Type: application/json
+
+{
+    "date": "220307",
+    "isShipped": false,
+    "matchStock": true
+}
+
+### Get all shipped orders
+GET http://localhost:4649/orders?isShipped=true
+
+### Get all orders that match stock
+GET http://localhost:4649/orders?matchStock=true
+
+### Get all orders from a date
+GET http://localhost:4649/orders?date=220313
+
+### Get all orders
+GET http://localhost:4649/orders/
+
+### Delete an order
+DELETE http://localhost:4649/orders/m
+
+### Patch an order
+PATCH http://localhost:4649/orders/2022313722
+Content-Type: application/json
+
+{
+    "isShipped": true
+}
