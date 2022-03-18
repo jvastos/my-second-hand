@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 # npm Modules
-node_modules/`
+node_modules/
