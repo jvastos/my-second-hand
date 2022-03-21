@@ -1,21 +1,8 @@
-let carts;
+import { Router } from "express";
+import { Db } from "mongodb";
 
-export default class CartsApi {
 
-    static async injectDB(conn) {
-        if(carts) {
-            return
-        }
-        try {
-            carts = await conn.db(process.env.MYSECONDHAND_NS).collection("carts");
-        } catch (e) {
-            console.error(
-                `Unable to establish a collection handle in CartsApi: ${e}`,
-            )
-        }
-    }
-
-    static async apiPostCart(req, res) {
+const createCart = (db) => async (req, res) => {
 
         const date = new Date();
 
@@ -30,12 +17,12 @@ export default class CartsApi {
             productsList: []
         };
 
-        await carts.insertOne(cart);
+        await (db).collection("carts").insertOne(cart);
 
         res.status(200).end();
     }
 
-    static async apiGetCart (req, res) {
+const getCart = (db) => async (req, res) => {
         const cartId = req.params.cartId;
 
         let filter = {};
@@ -46,16 +33,18 @@ export default class CartsApi {
 
         console.log('filter', filter);
 
-        const cart = await carts.find( filter ).toArray();
+        const cart = await (db).collection("carts").find( filter ).toArray();
 
         res.json(cart);
     }
 
-    static async apiUpdateCart (req, res) {
+const addProdToCart = (db) => async (req, res) => {
+
         const theSelectedCartId = req.params.cartId;
         const productName = req.query.name;
         const productQuantity = req.query.quantity;
-        await carts.updateOne(
+
+        await (db).collection("carts").updateOne(
             {_id: theSelectedCartId}, 
             {$push: 
                 {productsList: 
@@ -69,4 +58,19 @@ export default class CartsApi {
 
         res.status(200).end();   
     }
+
+
+/**
+ * Returns movie routes.
+ * @param db {Db} A connected MongoDB instance.
+ * @returns {Router}
+ */
+export function cartRoutes(db) {
+    const router = new Router();
+  
+    router.post("/carts", createCart(db));
+    router.get("/carts/id/:cartId", getCart(db));
+    router.patch("/carts/id/:cartId", addProdToCart(db));
+  
+    return router;
 }
