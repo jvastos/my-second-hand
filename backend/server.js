@@ -1,6 +1,7 @@
 import express from "express";
 import { Db } from "mongodb";
 import { cartRoutes } from "./modules/carts.js";
+import cors from "cors";
 
 /**
  * Returns a bootstrapped Express server
@@ -9,6 +10,12 @@ import { cartRoutes } from "./modules/carts.js";
  */
 export function createServer(db) {
   const app = express();
+
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+    })
+  );
 
   // A middleware which makes sure that the body of requests of
   // `application/json` content type are parsed as JSON automatically.

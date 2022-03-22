@@ -3,11 +3,11 @@ import { createServer } from "./server.js";
 
 // Use a MongoDB url from the environment if it exists,
 // otherwise use a locally running one.
-const DB_URL = "mongodb+srv://secondhanduser:050457@cluster0.hp5vo.mongodb.net/my-second-hand?retryWrites=true&w=majority";
+const DB_URL = "mongodb://localhost:27017";
 const DB_NAME = "my-second-hand";
 
 // Use PORT from the environment or default to 8080.
-const PORT = 5000;
+const PORT = 8080;
 
 /**
  * The main startup function.

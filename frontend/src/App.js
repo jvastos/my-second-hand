@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+
 
 function App() {
+
+async function createCart(url) {
+
+    console.log("New cart created");
+
+    const response = await fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache', 
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
+
+    return response;
+
+  }
+
+async function updateCart(url) {
+
+    console.log("Cart updated");
+
+    const response = await fetch(url, {
+      method: 'PATCH',
+      mode: 'cors',
+      cache: 'no-cache', 
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
+
+    return response;
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <button onClick={() => createCart("http://localhost:8080/my-second-hand/carts")}>Create cart</button>
+     <button onClick={() => updateCart("http://localhost:8080/my-second-hand/carts/id/2022313285?name=prod4&quantity=1")}>Update cart</button>
     </div>
   );
 }
