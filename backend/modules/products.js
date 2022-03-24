@@ -33,7 +33,7 @@ const searchProducts = (db) => async (req, res) => {
     let filter = {};
 
     if(query.name) {
-        filter.name = query.name;
+        filter.name = { $regex: new RegExp(query.name, "i")};
     }
 
     console.log(filter);

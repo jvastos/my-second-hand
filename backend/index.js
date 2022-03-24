@@ -1,13 +1,17 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { MongoClient } from "mongodb";
 import { createServer } from "./server.js";
 
+
+
 // Use a MongoDB url from the environment if it exists,
 // otherwise use a locally running one.
-const DB_URL = "mongodb://localhost:27017";
+const DB_URL = process.env.MONGODB_URL;
 const DB_NAME = "my-second-hand";
 
 // Use PORT from the environment or default to 8080.
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 /**
  * The main startup function.
