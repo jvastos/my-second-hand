@@ -1,12 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Products from './components/products'
 
 
 function App() {
 
 const baseURL = "http://localhost:8080/my-second-hand/carts";
 
-const [cart, setCart] = useState("cart initiated");  
+const [cart, setCart] = useState("cart initiated");
+const [searchTerm, setSearchTerm] = useState("");
+const [termToBeSearched, setTermToBeSearched] = useState();
 
 /* useEffect(() => {
   setCart("cart changed by useEffect");
@@ -36,8 +39,13 @@ async function getCart() {
 
     const response = await fetch(baseURL + "/id/2022313285");
     let responseFormat = await response.json();
-    setCart(responseFormat[0].productsList.map(i => <li key={Math.random()}> {"name: " + i.name.toString() + " " + "quantity: " + i.quantity.toString()}</li>));
-    console.log(responseFormat[0].productsList.map(i => i.name + " x " + i.quantity.toString()));
+    setCart(responseFormat[0].productsList.map(i =>
+        <tr key={Math.random()}>
+          <td>{i.name}</td>
+          <td>{i.quantity}</td>
+        </tr>
+    ));
+    console.log(responseFormat[0].productsList);
 
   }
 
@@ -66,15 +74,36 @@ async function updateCart() {
 
   }
 
+  function handleChange(e) {
+    setSearchTerm(e.target.value);
+    console.log(searchTerm);
+  }
+
+  function handleClick() {
+    const termToBeSearched = searchTerm;
+    setTermToBeSearched(termToBeSearched);
+  }
+
   return (
-    <div>
-      <button onClick={createCart}>Create cart</button>
-      <button onClick={() => getCart("http://localhost:8080/my-second-hand/carts/id/2022313285")}>Get cart</button>
-      <button onClick={updateCart}>Update cart</button>
-      <ul>
-        {cart}
-      </ul>
-    </div>
+    <>
+      <button onClick={createCart} className="btn btn-primary">Create cart</button>
+      <button onClick={getCart} className="btn btn-primary">Get cart</button>
+      <button onClick={updateCart} className="btn btn-primary">Update cart</button>
+      <table>
+        <tbody>
+          {cart}
+        </tbody>
+      </table>
+      <div className="container">
+        <div className="input-group m-3">
+          <input type="text" className="form-control" placeholder="Search for product names" aria-label="Search" aria-describedby="button-search" onChange={handleChange}/>
+          <button className="btn btn-outline-secondary" type="button" id="button-search" onClick={handleClick}>Search</button>
+        </div>
+        <div className="row row-cols-3">
+          <Products termtobesearched={termToBeSearched}/>
+        </div>
+      </div>
+    </>
   );
 }
 

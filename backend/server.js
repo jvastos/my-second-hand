@@ -1,6 +1,7 @@
 import express from "express";
 import { Db } from "mongodb";
 import { cartRoutes } from "./modules/carts.js";
+import { productRoutes } from "./modules/products.js";
 import cors from "cors";
 
 /**
@@ -22,6 +23,7 @@ export function createServer(db) {
   app.use(express.json());
 
   app.use("/my-second-hand", cartRoutes(db));
+  app.use("/my-second-hand", productRoutes(db));
 
   return app;
 }
