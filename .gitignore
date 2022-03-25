@@ -351,3 +351,6 @@ MigrationBackup/
 
 # npm Modules
 node_modules/
+
+#environmental variables
+.env
