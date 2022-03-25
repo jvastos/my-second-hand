@@ -1,42 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Products from './components/products'
+import Products from './components/Products'
 import AddToCartButton from './components/AddToCartButton';
+import Cart from './components/Cart';
 
 
 function App() {
 
-const baseURLcarts = "http://localhost:8080/my-second-hand/carts";
+/* const baseURLcarts = "http://localhost:8080/my-second-hand/carts"; */
 
-const [cart, setCart] = useState("cart initiated");
 const [searchTerm, setSearchTerm] = useState("");
 const [termToBeSearched, setTermToBeSearched] = useState();
 
-/* useEffect(() => {
-  setCart("cart changed by useEffect");
-}, []) */
-
-async function createCart() {
-
-    console.log("New cart created");
-
-    const response = await fetch(baseURLcarts, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache', 
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-    });
-
-    return response;
-
-  }
-
-async function getCart() {
+/* async function getCart() {
 
     const response = await fetch(baseURLcarts + "/id/2022313285");
     let responseFormat = await response.json();
@@ -48,14 +24,9 @@ async function getCart() {
     ));
     console.log(responseFormat[0].productsList);
 
-  }
-
-  /* function test() {
-    setCart("cart changed by test function");
-    console.log(cart);
   } */
 
-async function updateCart() {
+/* async function updateCart() {
 
     console.log("Cart updated");
 
@@ -73,7 +44,7 @@ async function updateCart() {
 
     return response;
 
-  }
+  } */
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
@@ -86,19 +57,19 @@ async function updateCart() {
 
   return (
     <>
-      <button 
-      onClick={createCart} 
-      className="btn btn-primary">Create cart</button>
-      <button 
+      {/* <button 
       onClick={getCart} 
       className="btn btn-primary">Get cart</button>
       <button 
       onClick={updateCart} 
-      className="btn btn-primary">Update cart</button>
+      className="btn btn-primary">Update cart</button> */}
+      <div className="d-flex justify-content-end">
+        <Cart />
+      </div>
       <table>
-        <tbody>
+       {/*  <tbody>
           {cart}
-        </tbody>
+        </tbody> */}
       </table>
       <div className="container">
         <div className="input-group m-3">

@@ -4,20 +4,7 @@ import { Db } from "mongodb";
 
 const createCart = (db) => async (req, res) => {
 
-        const date = new Date();
-
-        const todaysDate =`${date.getFullYear()}${date.getMonth()+1}${date.getDate()}`;
-
-        const randomNumber = Math.floor(Math.random() * 1000);
-
-        const cartId = `${todaysDate}${randomNumber}`;
-
-        const cart = { 
-            _id : cartId,
-            productsList: []
-        };
-
-        await (db).collection("carts").insertOne(cart);
+        await (db).collection("carts").insertOne(req.body);
 
         res.status(200).end();
     }
@@ -42,7 +29,6 @@ const addProdToCart = (db) => async (req, res) => {
 
         const theSelectedCartId = req.params.cartId;
         const productName = req.query.name;
-        const productQuantity = req.query.quantity;
 
         await (db).collection("carts").updateOne(
             {_id: theSelectedCartId}, 
@@ -50,7 +36,7 @@ const addProdToCart = (db) => async (req, res) => {
                 {productsList: 
                     {
                     name: productName, 
-                    quantity: productQuantity
+                    quantity: + 1 //NEED TO SOLVE THIS: HOW TO INCREMENT JUST THIS KEY BY 1?
                     }
                 }
             }

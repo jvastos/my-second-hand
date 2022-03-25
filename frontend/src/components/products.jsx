@@ -17,7 +17,9 @@ function Products(props) {
                     <h3 className="card-title m-1">{i.name}</h3>
                     <h3 className="card-subtitle m-1">{i.price}$</h3>
                     <div className="row justify-content-around">
-                        <AddToCartButton />
+                        <AddToCartButton 
+                        prodname={i.name}
+                        prodprice={i.price}/>
                     </div>
                 </div>
             </div>
