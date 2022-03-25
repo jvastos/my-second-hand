@@ -40,7 +40,7 @@ function Cart() {
 
         console.log("New cart created");
         setCartId(generatedCartId);
-        console.log(cartId); //NEED TO SOLVE THIS: WHY IS NOT LOGGING THE CURRENT
+        console.log(generatedCartId);
 
         return response
         }

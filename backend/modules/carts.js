@@ -30,20 +30,30 @@ const addProdToCart = (db) => async (req, res) => {
         const theSelectedCartId = req.params.cartId;
         const productName = req.query.name;
 
-        await (db).collection("carts").updateOne(
-            {_id: theSelectedCartId}, 
-            {$push: 
-                {productsList: 
-                    {
-                    name: productName, 
-                    quantity: + 1 //NEED TO SOLVE THIS: HOW TO INCREMENT JUST THIS KEY BY 1?
+        let currentCart = await (db).collection("carts").findOne({_id: theSelectedCartId});
+
+        console.log(currentCart);
+
+        if(currentCart.productsList.find((prod) => prod.name == req.query.name)) {
+            await db.collection("carts").updateOne(
+                { "_id": theSelectedCartId, "productsList.name": productName},
+                { $inc: { "productsList.$.quantity" : 1 } }
+             );
+        } else {
+            await (db).collection("carts").updateOne(
+                {_id: theSelectedCartId}, 
+                {$push: 
+                    {productsList: 
+                        {
+                        name: productName, 
+                        quantity: 1
+                        }
                     }
                 }
-            }
-        );
+            );
 
         res.status(200).end();   
-    }
+    }}
 
 
 /**

@@ -8,7 +8,7 @@ function AddToCartButton(props) {
 
     function updateCart() {
 
-        fetch(baseURLcarts + `/id/${Cart.cartId}` + "?name=" + `${props.prodname}`, { //NEED TO SOLVE THIS: HOW TO CHECK THE Cart.cartId VALUE
+        fetch(baseURLcarts + `/id/2022313285` + "?name=" + `${props.prodname}`, {
             method: 'PATCH',
             mode: 'cors',
             cache: 'no-cache', 
@@ -18,7 +18,8 @@ function AddToCartButton(props) {
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
-          });
+          })
+          .catch (error => {console.log("There was an error", error)});
         console.log('added to cart');
         console.log(props);
     }
