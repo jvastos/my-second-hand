@@ -1,14 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import Cart from "./Cart";
+import { CartIdContext, CartContentContext } from "../App";
 
 function AddToCartButton(props) {
-
+    const cartId = useContext(CartIdContext);
+    const cartContent = useContext(CartContentContext);
+    const setCartContent = props.setcartcontent;
     const baseURLcarts = "http://localhost:8080/my-second-hand/carts";
 
     function updateCart() {
 
-        fetch(baseURLcarts + `/id/2022313285` + "?name=" + `${props.prodname}`, {
+        fetch(baseURLcarts + `/id/${cartId}` + "?name=" + `${props.prodname}`, {
             method: 'PATCH',
             mode: 'cors',
             cache: 'no-cache', 
@@ -20,8 +23,12 @@ function AddToCartButton(props) {
             referrerPolicy: 'no-referrer',
           })
           .catch (error => {console.log("There was an error", error)});
+    
         console.log('added to cart');
-        console.log(props);
+        fetch(baseURLcarts + `/id/${cartId}`)
+        .then(response => response.json())
+        .then(data => setCartContent(data[0].productsList));
+        console.log(cartContent);
     }
     
     return (
