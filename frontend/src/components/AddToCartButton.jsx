@@ -27,7 +27,8 @@ function AddToCartButton(props) {
         console.log('added to cart');
         fetch(baseURLcarts + `/id/${cartId}`)
         .then(response => response.json())
-        .then(data => setCartContent(data[0].productsList));
+        .then(data => setCartContent(data[0].productsList))
+        .catch (error => {console.log("There was an error", error)});;
         console.log(cartContent);
     }
     

@@ -133,8 +133,8 @@ useEffect(() => {
           <div className="row">
             <Products
             setcartcontent={setCartContent}
-            termtobesearched={termToBeSearched}
-            cartcontent={cartContent}/>
+            cartcontent={cartContent}
+            termtobesearched={termToBeSearched}/>
           </div>
         </div>
       </CartContentContext.Provider>

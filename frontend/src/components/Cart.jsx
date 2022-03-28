@@ -1,18 +1,15 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react"
-import { CartContentContext } from "../App";
+import { useState, useEffect, useContext, useRef } from "react"
+import { CartIdContext, CartContentContext } from "../App";
 
 
-function Cart() {
+function Cart(props) {
 
-    let cartContent = useContext(CartContentContext);
-
-    console.log("cartcontent", cartContent);
-   
+    console.log("cart content", props.cartcontent);
 
     return (    
     <div className="card col-1 text-center m-2">
-        {cartContent!="Cart is empty"?cartContent.map(i => 
+        {props.cartcontent!="Cart is empty"?props.cartcontent.map(i => 
             <div key={Math.random()}>
                 <h3 >{i.name} x {i.quantity}</h3>
         </div>
