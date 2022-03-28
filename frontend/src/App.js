@@ -108,7 +108,9 @@ useEffect(() => {
       <CartIdContext.Provider value={cartId}>
       <CartContentContext.Provider value={cartContent}>
         <div className="d-flex justify-content-end">
-          <Cart cartcontent={cartContent} />
+          <Cart 
+          cartid={cartId}
+          cartcontent={cartContent} />
         </div>
         <table>
         {/*  <tbody>

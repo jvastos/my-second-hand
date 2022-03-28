@@ -5,13 +5,12 @@ import { CartIdContext, CartContentContext } from "../App";
 
 function AddToCartButton(props) {
     const cartId = useContext(CartIdContext);
-    const cartContent = useContext(CartContentContext);
     const setCartContent = props.setcartcontent;
     const baseURLcarts = "http://localhost:8080/my-second-hand/carts";
 
-    function updateCart() {
+    async function updateCart() {
 
-        fetch(baseURLcarts + `/id/${cartId}` + "?name=" + `${props.prodname}`, {
+        await fetch(baseURLcarts + `/id/${cartId}` + "?name=" + `${props.prodname}`, {
             method: 'PATCH',
             mode: 'cors',
             cache: 'no-cache', 
@@ -25,11 +24,10 @@ function AddToCartButton(props) {
           .catch (error => {console.log("There was an error", error)});
     
         console.log('added to cart');
-        fetch(baseURLcarts + `/id/${cartId}`)
+        await fetch(baseURLcarts + `/id/${cartId}`)
         .then(response => response.json())
-        .then(data => setCartContent(data[0].productsList))
-        .catch (error => {console.log("There was an error", error)});;
-        console.log(cartContent);
+        .then(data => {setCartContent(data[0].productsList); console.log("data[0].productsList =", data[0].productsList)})
+        .catch (error => {console.log("There was an error", error)});
     }
     
     return (
