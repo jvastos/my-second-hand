@@ -5,7 +5,7 @@ import { CartIdContext, CartContentContext } from "../App";
 
 function Cart(props) {
 
-    console.log("cart content", props.cartcontent);
+    console.log("props.cartcontent =", props.cartcontent);
 
     return (    
     <div className="card col-1 text-center m-2">
