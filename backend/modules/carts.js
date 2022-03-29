@@ -3,57 +3,58 @@ import { Db } from "mongodb";
 
 
 const createCart = (db) => async (req, res) => {
+    
+    await (db).collection("carts").insertOne(req.body);
 
-        await (db).collection("carts").insertOne(req.body);
-
-        res.status(200).end();
-    }
+    res.status(200).end();
+}
 
 const getCart = (db) => async (req, res) => {
-        const cartId = req.params.cartId;
 
-        let filter = {};
+    const cartId = req.params.cartId;
 
-        if(cartId) {
-            filter._id = cartId;
-        }
+    let filter = {};
 
-        console.log('filter', filter);
-
-        const cart = await (db).collection("carts").find( filter ).toArray();
-
-        res.json(cart);
+    if(cartId) {
+        filter._id = cartId;
     }
+
+    console.log('filter', filter);
+
+    const cart = await (db).collection("carts").find( filter ).toArray();
+
+    res.json(cart);
+}
 
 const addProdToCart = (db) => async (req, res) => {
 
-        const theSelectedCartId = req.params.cartId;
-        const productName = req.query.name;
+    const theSelectedCartId = req.params.cartId;
+    const productName = req.query.name;
 
-        let currentCart = await (db).collection("carts").findOne({_id: theSelectedCartId});
+    let currentCart = await (db).collection("carts").findOne({_id: theSelectedCartId});
 
-        console.log(currentCart);
+    console.log(currentCart);
 
-        if(currentCart.productsList.find((prod) => prod.name == req.query.name)) {
-            await db.collection("carts").updateOne(
-                { "_id": theSelectedCartId, "productsList.name": productName},
-                { $inc: { "productsList.$.quantity" : 1 } }
-             );
-        } else {
-            await (db).collection("carts").updateOne(
-                {_id: theSelectedCartId}, 
-                {$push: 
-                    {productsList: 
-                        {
-                        name: productName, 
-                        quantity: 1
-                        }
+    if(currentCart.productsList.find((prod) => prod.name == req.query.name)) {
+        await db.collection("carts").updateOne(
+            { "_id": theSelectedCartId, "productsList.name": productName},
+            { $inc: { "productsList.$.quantity" : 1 } }
+            );
+    } else {
+        await (db).collection("carts").updateOne(
+            {_id: theSelectedCartId}, 
+            {$push: 
+                {productsList: 
+                    {
+                    name: productName, 
+                    quantity: 1
                     }
                 }
-            );
-
-        res.status(200).end();   
-    }}
+            }
+        );
+    }
+    res.status(200).end();  
+}
 
 
 /**
@@ -62,6 +63,7 @@ const addProdToCart = (db) => async (req, res) => {
  * @returns {Router}
  */
 export function cartRoutes(db) {
+    
     const router = new Router();
   
     router.post("/carts", createCart(db));

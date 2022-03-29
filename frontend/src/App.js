@@ -15,6 +15,8 @@ const [cartContent, setCartContent] = useState("Cart is empty");
 const [searchTerm, setSearchTerm] = useState("");
 const [termToBeSearched, setTermToBeSearched] = useState();
 
+console.log("cartContent =", cartContent);
+
 useEffect(() => {
     async function createCart() {
 
