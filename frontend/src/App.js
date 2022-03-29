@@ -1,7 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Products from './components/Products'
-import AddToCartButton from './components/AddToCartButton';
+import CartPreview from './components/CartPreview';
 import Cart from './components/Cart';
 
 const CartIdContext = React.createContext();
@@ -9,13 +10,13 @@ const CartContentContext = React.createContext();
 
 function App() {
 
-/* const baseURLcarts = "http://localhost:8080/my-second-hand/carts"; */
-const [cartId, setCartId] = useState("");
-const [cartContent, setCartContent] = useState("Cart is empty");
-const [searchTerm, setSearchTerm] = useState("");
+const baseURLcarts = 'http://localhost:8080/my-second-hand/carts';
+const [cartId, setCartId] = useState('');
+const [cartContent, setCartContent] = useState('Cart is empty');
+const [searchTerm, setSearchTerm] = useState('');
 const [termToBeSearched, setTermToBeSearched] = useState();
 
-console.log("cartContent =", cartContent);
+console.log('cartContent =', cartContent);
 
 useEffect(() => {
     async function createCart() {
@@ -33,7 +34,7 @@ useEffect(() => {
             productsList: []
         };
 
-        const response = await fetch("http://localhost:8080/my-second-hand/carts", {
+        const response = await fetch(baseURLcarts, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache', 
@@ -47,7 +48,7 @@ useEffect(() => {
         }
     )
 
-    console.log("New cart created");
+    console.log('New cart created');
     setCartId(generatedCartId);
     console.log(generatedCartId);
 
@@ -55,40 +56,6 @@ useEffect(() => {
     }
     createCart();
 }, [])
-
-/* async function getCart() {
-
-    const response = await fetch(baseURLcarts + "/id/2022313285");
-    let responseFormat = await response.json();
-    setCart(responseFormat[0].productsList.map(i =>
-        <tr key={Math.random()}>
-          <td>{i.name}</td>
-          <td>{i.quantity}</td>
-        </tr>
-    ));
-    console.log(responseFormat[0].productsList);
-
-  } */
-
-/* async function updateCart() {
-
-    console.log("Cart updated");
-
-    const response = await fetch(baseURLcarts + "/id/2022313285?name=prod4&quantity=1", {
-      method: 'PATCH',
-      mode: 'cors',
-      cache: 'no-cache', 
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-    });
-
-    return response;
-
-  } */
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
@@ -101,48 +68,46 @@ useEffect(() => {
 
   return (
     <>
-      {/* <button 
-      onClick={getCart} 
-      className="btn btn-primary">Get cart</button>
-      <button 
-      onClick={updateCart} 
-      className="btn btn-primary">Update cart</button> */}
-      <CartIdContext.Provider value={cartId}>
-      <CartContentContext.Provider value={cartContent}>
-        <div className="d-flex justify-content-end">
-          <Cart 
-          cartid={cartId}
-          cartcontent={cartContent} />
-        </div>
-        <table>
-        {/*  <tbody>
-            {cart}
-          </tbody> */}
-        </table>
-        <div className="container">
-          <div className="input-group m-3">
-            <input 
-            type="text" 
-            className="form-control" 
-            placeholder="Search for product names" 
-            aria-label="Search" 
-            aria-describedby="button-search" 
-            onChange={handleChange}/>
-            <button 
-            className="btn btn-outline-secondary" 
-            type="button" 
-            id="button-search" 
-            onClick={handleClick}>Search</button>
-          </div>
-          <div className="row">
-            <Products
-            setcartcontent={setCartContent}
-            cartcontent={cartContent}
-            termtobesearched={termToBeSearched}/>
-          </div>
-        </div>
-      </CartContentContext.Provider>
-      </CartIdContext.Provider>
+      <Router>
+        <CartIdContext.Provider value={cartId}>
+        <CartContentContext.Provider value={cartContent}>
+          <Switch>
+            <Route exact path='/'>
+              <div className='d-flex justify-content-end'>
+                <CartPreview 
+                cartid={cartId}
+                cartContent={cartContent} />
+              </div>
+              <div className='container'>
+                <div className='input-group m-3'>
+                  <input 
+                  type='text' 
+                  className='form-control' 
+                  placeholder='Search for product names' 
+                  aria-label='Search' 
+                  aria-describedby='button-search' 
+                  onChange={handleChange}/>
+                  <button 
+                  className='btn btn-outline-secondary' 
+                  type='button' 
+                  id='button-search' 
+                  onClick={handleClick}>Search</button>
+                </div>
+                <div className='row'>
+                  <Products
+                  setCartContent={setCartContent}
+                  cartContent={cartContent}
+                  termToBeSearched={termToBeSearched}/>
+                </div>
+              </div>
+            </Route>
+            <Route path='/cart'>
+              <Cart cartContent={cartContent}/>
+            </Route>
+          </Switch>
+        </CartContentContext.Provider>
+        </CartIdContext.Provider>
+      </Router>
     </>
   );
 }

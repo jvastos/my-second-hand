@@ -1,23 +1,20 @@
 import React from "react";
-import { useState, useEffect, useContext, useRef } from "react"
-import { CartIdContext, CartContentContext } from "../App";
-
+import { Link } from "react-router-dom";
 
 function Cart(props) {
+    let currentCartContent = props.cartContent;
 
-    let currentCartContent = props.cartcontent;
-
-    const [currrentCartQuantity, setCurrrentCartQuantity] = useState(0);
-
-    useEffect(() => {
-        if(currentCartContent != "Cart is empty") {
-            setCurrrentCartQuantity(currentCartContent.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0));
-        }
-    })
-
-    return (    
-    <div className="card col-1 text-center m-2">
-        {currentCartContent != "Cart is empty"?<h6>Your cart has {currrentCartQuantity} items.</h6>:<h3>Cart is empty</h3>}
+    return (
+    <div className='d-flex justify-content-center'>
+        <div className="card col-1 text-center m-5 w-50">
+        <Link to='/' className="m-5">back to home</Link>
+        {currentCartContent != "Cart is empty"?
+        currentCartContent.map(i => 
+            <div key={Math.random()}>
+                <h3 >{i.name} x {i.quantity}</h3>
+            </div>)
+        :<h3>Cart is empty</h3>}
+        </div>
     </div>
     )
 }

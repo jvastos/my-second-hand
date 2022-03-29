@@ -7,7 +7,7 @@ function Products(props) {
     const [products, setProducts] = useState("no products");
 
     useEffect(()=>{
-        fetch(!props.termtobesearched ? "http://localhost:8080/my-second-hand/products":`http://localhost:8080/my-second-hand/products/search?name=${props.termtobesearched}`)
+        fetch(!props.termToBeSearched ? "http://localhost:8080/my-second-hand/products":`http://localhost:8080/my-second-hand/products/search?name=${props.termToBeSearched}`)
         .then(response => response.json())
         .then(data => setProducts(data.map(i => 
             <div 
@@ -18,8 +18,8 @@ function Products(props) {
                     <h3 className="card-subtitle m-1">{i.price}$</h3>
                     <div className="row justify-content-around">
                         <AddToCartButton
-                        setcartcontent={props.setcartcontent}
-                        cartcontent={props.cartcontent} 
+                        setCartContent={props.setCartContent}
+                        cartContent={props.cartContent} 
                         prodname={i.name}
                         prodprice={i.price}/>
                     </div>
