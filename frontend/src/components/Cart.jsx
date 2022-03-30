@@ -19,7 +19,7 @@ function Cart(props) {
             </div>)
         :<h3>Cart is empty</h3>}
 
-        <CheckoutButton cartContent={props.cartContent} />
+        {currentCartContent !== 'Cart is empty'&&<CheckoutButton cartContent={props.cartContent} />}
 
         </div>
 
