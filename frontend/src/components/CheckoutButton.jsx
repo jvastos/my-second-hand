@@ -44,7 +44,7 @@ function CheckoutButton (props) {
     return (
         <button 
         onClick={createOrder}
-        className='btn btn-primary col-4 m-3'>Checkout</button>
+        className='btn btn-primary col-5 m-3'>Checkout</button>
     )
 }
 
