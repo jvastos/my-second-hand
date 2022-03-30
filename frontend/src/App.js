@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Products from './components/Products'
+import Orders from './components/Orders';
 import CartPreview from './components/CartPreview';
 import Cart from './components/Cart';
 
@@ -103,6 +104,9 @@ useEffect(() => {
             </Route>
             <Route path='/cart'>
               <Cart cartContent={cartContent}/>
+            </Route>
+            <Route path='/orders'>
+              <Orders />
             </Route>
           </Switch>
         </CartContentContext.Provider>

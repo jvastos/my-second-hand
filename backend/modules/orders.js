@@ -6,7 +6,21 @@ const createOrder = (db) => async (req, res)=> {
     await (db).collection("orders").insertOne(req.body);
 
     res.status(200).end();
-}
+};
+
+const getAllOrders = (db) => async (req, res)=> {
+
+    const orders = await (db).collection("orders").find().toArray();
+
+    res.json(orders);
+};
+
+const markOrderAsShipped = (db) => async (req, res) => {
+    const theSelectedOrderId = req.params.orderId;
+    await (db).collection("orders").updateOne({ _id: theSelectedOrderId }, {$set: {isShipped: true}});
+
+    res.status(200).end();
+};
 
 /* app.get("/orders", async (req, res) => {
     const query = req.query;
@@ -30,14 +44,6 @@ const createOrder = (db) => async (req, res)=> {
     res.json(orders);
 })
 
-app.patch('/orders/:orderId', async (req, res) => {
-    const theSelectedOrderId = req.params.orderId;
-    const reqBody = req.body;
-    await collectionOrders.updateOne({ _id: theSelectedOrderId }, {$set: reqBody});
-
-    res.status(200).end();
-}) */
-
 /**
  * Returns movie routes.
  * @param db {Db} A connected MongoDB instance.
@@ -48,6 +54,8 @@ app.patch('/orders/:orderId', async (req, res) => {
     const router = new Router();
   
     router.post("/orders", createOrder(db));
+    router.get("/orders", getAllOrders(db));
+    router.patch("/orders/id/:orderId", markOrderAsShipped(db));
     /* router.get("/orders/id/:orderId", getCart(db));
     router.patch("/orders/id/:orderId", addProdToCart(db)); */
   
