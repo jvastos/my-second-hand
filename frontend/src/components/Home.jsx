@@ -6,16 +6,10 @@ import CartPreview from './CartPreview';
 function Home(props) {
 
 const [searchTerm, setSearchTerm] = useState('');
-const [termToBeSearched, setTermToBeSearched] = useState();
 
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
-  }
-
-  function handleClick() {
-    const termToBeSearched = searchTerm;
-    setTermToBeSearched(termToBeSearched);
   }
 
   return (

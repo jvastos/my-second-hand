@@ -13,8 +13,6 @@ const baseURLcarts = 'http://localhost:8080/my-second-hand/carts';
 const [cartId, setCartId] = useState('');
 const [cartContent, setCartContent] = useState('Cart is empty');
 
-console.log('cartContent =', cartContent);
-
 useEffect(() => {
     async function createCart() {
 
