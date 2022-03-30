@@ -26,25 +26,22 @@ const [termToBeSearched, setTermToBeSearched] = useState();
             cartContent={props.cartContent} />
         </div>
         <div className='container'>
-            <div className='input-group m-3'>
-            <input 
-            type='text' 
-            className='form-control' 
-            placeholder='Search for product names' 
-            aria-label='Search' 
-            aria-describedby='button-search' 
-            onChange={handleChange}/>
-            <button 
-            className='btn btn-outline-secondary' 
-            type='button' 
-            id='button-search' 
-            onClick={handleClick}>Search</button>
+            <div className='row justify-content-around'>
+                <div className='col-4 m-3'>
+                    <input 
+                    type='text' 
+                    className='form-control text-center' 
+                    placeholder='Search' 
+                    aria-label='Search' 
+                    aria-describedby='button-search' 
+                    onChange={handleChange}/>
+                </div>
             </div>
             <div className='row'>
             <Products
             setCartContent={props.setCartContent}
             cartContent={props.cartContent}
-            termToBeSearched={termToBeSearched}/>
+            termToBeSearched={searchTerm}/>
             </div>
         </div>
     </>

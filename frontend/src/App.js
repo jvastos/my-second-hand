@@ -6,7 +6,6 @@ import Orders from './components/Orders'
 import Cart from './components/Cart';
 
 const CartIdContext = React.createContext();
-const CartContentContext = React.createContext();
 
 function App() {
 
@@ -59,7 +58,6 @@ useEffect(() => {
     <>
       <Router>
         <CartIdContext.Provider value={cartId}>
-        <CartContentContext.Provider value={cartContent}>
           <Switch>
             <Route exact path='/'>
               <Home 
@@ -74,11 +72,10 @@ useEffect(() => {
               <Orders />
             </Route>
           </Switch>
-        </CartContentContext.Provider>
         </CartIdContext.Provider>
       </Router>
     </>
   );
 }
 
-export { App, CartIdContext, CartContentContext } ;
+export { App, CartIdContext } ;

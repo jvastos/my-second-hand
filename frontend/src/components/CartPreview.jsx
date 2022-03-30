@@ -18,7 +18,7 @@ function CartPreview(props) {
     return (    
     <Link 
     to='/cart' 
-    className="card col-1 text-center m-2">
+    className="d-flex card col-2 text-center m-2">
         <div>
             {currentCartContent !== "Cart is empty"?
             <h6 className="card-title m-2">Your cart has {currrentCartQuantity} {currrentCartQuantity>1?'items':'item'}</h6>

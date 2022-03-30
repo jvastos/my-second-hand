@@ -32,7 +32,7 @@ function AddToCartButton(props) {
     return (
     <button 
     onClick={updateCart}
-    className='btn btn-primary col-4 m-1'>Add to cart</button>
+    className='btn btn-primary col-4 m-3'>Add to cart</button>
     )
 }
 

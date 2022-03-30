@@ -15,8 +15,8 @@ function Products(props) {
                 key={Math.random()} 
                 className="col-lg-4">
                     <div className="card text-center text-dark bg-light m-3">
-                        <h3 className="card-title m-1">{i.name}</h3>
-                        <h3 className="card-subtitle m-1">{i.price}$</h3>
+                        <h3 className="card-title m-3">{i.name}</h3>
+                        <h3 className="card-subtitle">{i.price}$</h3>
                         <div className="row justify-content-around">
                             <AddToCartButton
                             setCartContent={props.setCartContent}
