@@ -21,7 +21,7 @@ function Orders() {
                 key={Math.random()} 
                 className="col-lg-4">
                     <div className="card text-center text-dark bg-light m-3">
-                        <h4 className="card-title m-1">Order n. {i._id}</h4>
+                        <h4 className="card-title m-3">Order n. {i._id}</h4>
                         {i.productsList.map(x =>
                         <div key={Math.random()}>
                             <h6>{x.name} x {x.quantity}</h6>

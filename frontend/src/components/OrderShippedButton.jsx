@@ -26,7 +26,7 @@ function OrderShippedButton (props) {
 
     return (<button 
             onClick={markOrderAsShipped}
-            className='btn btn-primary col-4 m-1'>Mark as shipped</button>)
+            className='btn btn-primary col-4 m-3'>Mark as shipped</button>)
 }
 
 export default OrderShippedButton;

@@ -4,6 +4,7 @@ import CheckoutButton from './CheckoutButton';
 
 function Cart(props) {
     let currentCartContent = props.cartContent;
+    
 
     return (
     <div className='d-flex justify-content-center'>
