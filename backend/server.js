@@ -2,6 +2,7 @@ import express from "express";
 import { Db } from "mongodb";
 import { cartRoutes } from "./modules/carts.js";
 import { productRoutes } from "./modules/products.js";
+import { orderRoutes } from "./modules/orders.js";
 import cors from "cors";
 
 /**
@@ -24,6 +25,7 @@ export function createServer(db) {
 
   app.use("/my-second-hand", cartRoutes(db));
   app.use("/my-second-hand", productRoutes(db));
+  app.use("/my-second-hand", orderRoutes(db));
 
   return app;
 }

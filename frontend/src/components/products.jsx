@@ -26,7 +26,7 @@ function Products(props) {
                 </div>
             </div>
         )))
-        .catch (error => {console.log("There was an error", error)});
+        .catch (error => {console.log("There was an error fecthing the products", error)});
     }, [props]);
 
     return products;

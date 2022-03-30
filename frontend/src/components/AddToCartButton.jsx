@@ -20,13 +20,13 @@ function AddToCartButton(props) {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
           })
-          .catch (error => {console.log('There was an error', error)});
+          .catch (error => {console.log('There was an error adding the product to the cart', error)});
     
         console.log('added to cart');
         await fetch(baseURLcarts + `/id/${cartId}`)
         .then(response => response.json())
         .then(data => {setCartContent(data[0].productsList); console.log('data[0].productsList =', data[0].productsList)})
-        .catch (error => {console.log('There was an error', error)});
+        .catch (error => {console.log('There was an error while fetching the cart to update cartContent', error)});
     }
     
     return (

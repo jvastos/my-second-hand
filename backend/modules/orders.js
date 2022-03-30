@@ -1,58 +1,14 @@
-import express from 'express';
-import mongodb from "mongodb";
-import cors from "cors";
+import { Router } from "express";
+import { Db } from "mongodb";
 
-const mongoClient = new mongodb.MongoClient("mongodb+srv://secondhanduser:050457@cluster0.hp5vo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+const createOrder = (db) => async (req, res)=> {
 
-mongoClient.connect();
-
-const db = mongoClient.db("my-second-hand");
-const collectionOrders = db.collection("orders");
-
-const app = express();
-
-const PORT = 4649;
-
-app.use(express.json());
-app.use(
-    cors({
-        origin: "http://localhost:3000",
-    })
-);
-
-const requestLogger = (req, res, nextCallback) => {
-    const timestamp = new Date().toISOString();
-    const method = req.method;
-    const url = req.url;
-    const sourceIp = req.connection.remoteAddress;;
-
-    console.log(`${timestamp}`);
-    console.log(`${method}`);
-    console.log(`${url}`);
-    console.log(`${sourceIp}`);
-    nextCallback();
-}
-
-app.post('/orders', async (req, res)=> {
-
-    const date = new Date();
-
-    const todaysDate =`${date.getFullYear()}${date.getMonth()+1}${date.getDate()}`;
-
-    const randomNumber = Math.floor(Math.random() * 1000);
-
-    const orderId = `${todaysDate}${randomNumber}`;
-
-    const order = { ...req.body, _id : orderId };
-
-    await collectionOrders.insertOne(order);
+    await (db).collection("orders").insertOne(req.body);
 
     res.status(200).end();
-})
+}
 
-app.use(requestLogger);
-
-app.get("/orders", async (req, res) => {
+/* app.get("/orders", async (req, res) => {
     const query = req.query;
 
     let filter = {};
@@ -80,18 +36,20 @@ app.patch('/orders/:orderId', async (req, res) => {
     await collectionOrders.updateOne({ _id: theSelectedOrderId }, {$set: reqBody});
 
     res.status(200).end();
-})
+}) */
 
-app.delete('/orders/:orderId', async (req, res) => {
-    const theSelectedOrderId = req.params.orderId;
-    console.log(theSelectedOrderId);
-
-    await collectionOrders.deleteOne({ _id: theSelectedOrderId });
-
-    res.status(200).end();
-})
-
-
-app.listen(PORT, () => {
-    console.log(`my-second-hand is up and running @ http://localhost:${PORT}`)
-})
+/**
+ * Returns movie routes.
+ * @param db {Db} A connected MongoDB instance.
+ * @returns {Router}
+ */
+ export function orderRoutes(db) {
+    
+    const router = new Router();
+  
+    router.post("/orders", createOrder(db));
+    /* router.get("/orders/id/:orderId", getCart(db));
+    router.patch("/orders/id/:orderId", addProdToCart(db)); */
+  
+    return router;
+}
