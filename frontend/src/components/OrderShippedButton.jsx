@@ -1,8 +1,9 @@
 import React from "react";
+import { API_BASE_URL } from "../../config";
 
 function OrderShippedButton (props) {
 
-    const baseURLorders = 'http://localhost:8080/my-second-hand/orders';
+    const baseURLorders = `${API_BASE_URL}/orders`;
     const orderId = props.orderId;
     const setOrderAsShipped = props.setOrderAsShipped;
 

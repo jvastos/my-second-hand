@@ -1,11 +1,12 @@
 import React from 'react';
 import { useContext } from 'react'
 import { CartIdContext } from '../App';
+import { API_BASE_URL } from '../../config';
 
 function AddToCartButton(props) {
     const cartId = useContext(CartIdContext);
     const setCartContent = props.setCartContent;
-    const baseURLcarts = 'http://localhost:8080/my-second-hand/carts';
+    const baseURLcarts = `${API_BASE_URL}/carts`;
 
     async function updateCart() {
 

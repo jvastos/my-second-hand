@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import AddToCartButton from "./AddToCartButton";
+import { API_BASE_URL } from "../../config";
     
 function Products(props) {
 
@@ -8,7 +9,7 @@ function Products(props) {
 
     useEffect(()=>{
         async function fetchProducts() {
-            await fetch(!props.termToBeSearched ? "http://localhost:8080/my-second-hand/products":`http://localhost:8080/my-second-hand/products/search?name=${props.termToBeSearched}`)
+            await fetch(!props.termToBeSearched ? `${API_BASE_URL}/products`:`${API_BASE_URL}/products/search?name=${props.termToBeSearched}`)
             .then(response => response.json())
             .then(data => setProducts(data.map(i => 
                 <div 

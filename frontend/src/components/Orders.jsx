@@ -2,9 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import OrderShippedButton from './OrderShippedButton';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
 
 function Orders() {
-    const baseURLorders = 'http://localhost:8080/my-second-hand/orders';
+    const baseURLorders = `${API_BASE_URL}/orders`;
 
     const [orders, setOrders] = useState("no orders");
     const [orderWasShipped, setOrderWasShipped ] = useState(false);

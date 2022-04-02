@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import Home from './components/Home'
 import Orders from './components/Orders'
 import Cart from './components/Cart';
+import { API_BASE_URL } from '../config';
 
 const CartIdContext = React.createContext();
 
 function App() {
 
-const baseURLcarts = 'http://localhost:8080/my-second-hand/carts';
+const baseURLcarts = `${API_BASE_URL}/carts`;
 const [cartId, setCartId] = useState('');
 const [cartContent, setCartContent] = useState('Cart is empty');
 

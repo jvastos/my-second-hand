@@ -1,10 +1,11 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
+import { API_BASE_URL } from "../../config";
 
 function CheckoutButton (props) {
 
     const currentCart = props.cartContent;
-    const baseURLorders = 'http://localhost:8080/my-second-hand/orders';
+    const baseURLorders = `${API_BASE_URL}/orders`;
     const history = useHistory();
 
     async function createOrder(){
