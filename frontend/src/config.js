@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://my-second-hand.herokuapp.com/my-second-hand';
+export const API_BASE_URL = 'https://my-second-hand.herokuapp.com/';
