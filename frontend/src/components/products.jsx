@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../config";
     
 function Products(props) {
 
+    const baseURLproducts = `${API_BASE_URL}/products`
     const [products, setProducts] = useState("no products");
 
     useEffect(()=>{
