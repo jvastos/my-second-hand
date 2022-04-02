@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Home from './components/Home'
 import Orders from './components/Orders'
 import Cart from './components/Cart';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from './config';
 
 const CartIdContext = React.createContext();
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react'
 import { CartIdContext } from '../App';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '../config';
 
 function AddToCartButton(props) {
     const cartId = useContext(CartIdContext);

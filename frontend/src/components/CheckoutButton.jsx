@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../config";
 
 function CheckoutButton (props) {
 

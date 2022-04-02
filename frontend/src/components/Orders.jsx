@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import OrderShippedButton from './OrderShippedButton';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '../config';
 
 function Orders() {
     const baseURLorders = `${API_BASE_URL}/orders`;
