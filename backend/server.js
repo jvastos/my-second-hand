@@ -15,7 +15,7 @@ export function createServer(db) {
 
   app.use(
     cors({
-      origin: "*",
+      origin: "*"
     })
   );
 
