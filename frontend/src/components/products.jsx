@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import AddToCartButton from "./AddToCartButton";
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../config";
     
 function Products(props) {
 
