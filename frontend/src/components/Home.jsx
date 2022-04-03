@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState} from 'react';
-import Products from './Products'
+import Products from './products'
 import CartPreview from './CartPreview';
 
 function Home(props) {
