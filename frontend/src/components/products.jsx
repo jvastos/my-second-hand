@@ -11,7 +11,7 @@ function Products(props) {
 
     useEffect(()=>{
         async function fetchProducts() {
-            await fetch(!props.termToBeSearched ? `${baseURLproducts}`:`${API_BASE_URL}/search?name=${props.termToBeSearched}`)
+            await fetch(!props.termToBeSearched ? `${baseURLproducts}`:`${baseURLproducts}/search?name=${props.termToBeSearched}`)
             .then(response => response.json())
             .then(data => setProducts(data.map(i => 
                 <div 
