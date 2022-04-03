@@ -1,15 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import AddToCartButton from "./AddToCartButton";
+import { API_BASE_URL } from "../config";
     
 function Products(props) {
 
-    /* const baseURLproducts = `${API_BASE_URL}/products` */
+    const baseURLproducts = `${API_BASE_URL}/products`
     const [products, setProducts] = useState("no products");
 
     useEffect(()=>{
         async function fetchProducts() {
-            await fetch(!props.termToBeSearched ? 'https://my-second-hand.herokuapp.com/my-second-hand/products':`https://my-second-hand.herokuapp.com/my-second-hand/products/search?name=${props.termToBeSearched}`)
+            await fetch(!props.termToBeSearched ? `${baseURLproducts}`:`${API_BASE_URL}/search?name=${props.termToBeSearched}`)
             .then(response => response.json())
             .then(data => setProducts(data.map(i => 
                 <div 
@@ -31,7 +32,7 @@ function Products(props) {
             .catch (error => {console.log("There was an error fecthing the products", error)});
         }
         fetchProducts();
-    }, [props]);
+    }, [props, baseURLproducts]);
 
     return products;
 }
