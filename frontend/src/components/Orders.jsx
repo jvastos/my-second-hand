@@ -39,7 +39,7 @@ function Orders() {
         }
         fetchOrders();
         setOrderWasShipped(false);
-    }, [orderWasShipped]);
+    }, [orderWasShipped, baseURLorders]);
 
     return (
         <>
