@@ -2,6 +2,7 @@ import React from 'react';
 import { useState} from 'react';
 import Products from './Products'
 import CartPreview from './CartPreview';
+import { Link } from 'react-router-dom';
 
 function Home(props) {
 
@@ -37,7 +38,12 @@ const [searchTerm, setSearchTerm] = useState('');
             cartContent={props.cartContent}
             termToBeSearched={searchTerm}/>
             </div>
+            <div className='row text-center'>
+                <Link to='/orders' className='m-3'>Orders admin</Link>
+            </div>
+            
         </div>
+        
     </>
   );
 }
