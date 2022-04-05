@@ -38,8 +38,8 @@ const [searchTerm, setSearchTerm] = useState('');
             cartContent={props.cartContent}
             termToBeSearched={searchTerm}/>
             </div>
-            <div className='row text-center'>
-                <Link to='/orders' className='m-3'>Orders admin</Link>
+            <div className='row justify-content-around text-center'>
+                <Link to='/orders' className='m-3 col-4'>Orders admin</Link>
             </div>
             
         </div>
