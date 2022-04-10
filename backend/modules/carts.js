@@ -56,6 +56,23 @@ const addProdToCart = (db) => async (req, res) => {
     res.status(200).end();  
 }
 
+const deleteProdFromCart = (db) => async (req, res) => {
+
+    const theSelectedCartId = req.params.cartId;
+    const productName = req.params.prodName;
+
+    let currentCart = await (db).collection("carts").findOne({_id: theSelectedCartId});
+
+    console.log(currentCart);
+
+    await db.collection("carts").updateOne(
+        { "_id": theSelectedCartId, "productsList.name": productName},
+        { $inc: { "productsList.$.quantity" : -1 } }
+    );
+    
+    res.status(200).end();  
+}
+
 
 /**
  * Returns movie routes.
@@ -69,6 +86,7 @@ export function cartRoutes(db) {
     router.post("/carts", createCart(db));
     router.get("/carts/id/:cartId", getCart(db));
     router.patch("/carts/id/:cartId", addProdToCart(db));
+    router.patch("/carts/id/:cartId/deleteProd/:prodName", deleteProdFromCart(db));
   
     return router;
 }

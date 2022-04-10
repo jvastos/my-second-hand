@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Home(props) {
 
-const [searchTerm, setSearchTerm] = useState('');
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   function handleChange(e) {
     setSearchTerm(e.target.value);

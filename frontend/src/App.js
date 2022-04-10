@@ -65,7 +65,9 @@ useEffect(() => {
               setCartContent={setCartContent}/>
             </Route>
             <Route path='/cart'>
-              <Cart cartContent={cartContent}/>
+              <Cart 
+              cartContent={cartContent}
+              setCartContent={setCartContent}/>
             </Route>
             <Route path='/orders'>
               <Orders />

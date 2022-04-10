@@ -8,7 +8,6 @@ function Products(props) {
     const baseURLproducts = `${API_BASE_URL}/products`
     const [products, setProducts] = useState("no products");
 
-
     useEffect(()=>{
         async function fetchProducts() {
             await fetch(!props.termToBeSearched ? `${baseURLproducts}`:`${baseURLproducts}/search?name=${props.termToBeSearched}`)
